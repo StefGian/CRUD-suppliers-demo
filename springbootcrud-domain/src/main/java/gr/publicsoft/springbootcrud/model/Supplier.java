@@ -5,14 +5,15 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
-import static gr.publicsoft.springbootcrud.Constants.SIZE_M;
+import static gr.publicsoft.springbootcrud.Constants.*;
 
 @Entity
 public class Supplier {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
     @NotBlank(message = "companyName is mandatory")
     @Size(max = SIZE_M)
@@ -45,12 +46,13 @@ public class Supplier {
     @Size(max = SIZE_M)
     private String country;
 
-    public long getId() {
-        return id;
-    }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getCompanyName() {
@@ -123,5 +125,10 @@ public class Supplier {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+    
+    @Override
+    public String toString() {
+        return "Supplier{ id=" + id + ", firstName=" + firstName + ", lastName=" + lastName +", companyName=" + companyName+", vatNumber=" + vatNumber+", city=" + city+", country=" + country+", zipCode=" + zipCode + ", irsOffice=" + irsOffice + ", address=" +address + '}';
     }
 }

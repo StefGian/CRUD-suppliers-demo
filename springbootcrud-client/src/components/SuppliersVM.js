@@ -94,7 +94,7 @@ export default {
       this.$events.fire('edit-supplier', null)
     },
     onSupplierSelected (dataItem) {
-      console.log('fire edit-supplier event')
+      console.log('fire edit-supplier event', dataItem);
       this.$events.fire('edit-supplier', dataItem)
     },
     onSupplierEdited (dataItem) {
@@ -104,6 +104,13 @@ export default {
       this.$http.get(this.url + this.query)
         .then(response => {
           this.suppliers = response.data._embedded.suppliers
+          this.suppliers.forEach(function(supplier) {
+            if (typeof(supplier.id) === "undefined") {
+              let link = supplier._links.self.href.split("/");
+              let id = link[link.length - 1]
+              supplier.id = id;
+            }
+          });
         })
         .catch(e => {
           console.log('error: ')

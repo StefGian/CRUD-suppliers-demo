@@ -12,18 +12,18 @@
         <el-col :span="12">
 
           <el-form-item label="Εισάγετε το όνομα"
-                        prop="name">
+                        prop="firame">
             <el-input prefix-icon="fa fa-user"
-                      v-model="supplier.name"
+                      v-model="supplier.firstName"
                       placeholder="Όνομα"
-                      autoComplete="name">
+                      autoComplete="frstName">
             </el-input>
           </el-form-item>
 
           <el-form-item label="Εισάγετε το επώνυμο"
                         prop="lastName">
             <el-input prefix-icon="fa fa-user"
-                      v-model="supplier.mobilePhone"
+                      v-model="supplier.lastName"
                       placeholder="Επώνυμο"
                       autoComplete="lastName">
             </el-input>

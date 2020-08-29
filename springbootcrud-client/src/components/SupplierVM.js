@@ -16,8 +16,7 @@ export default {
         },
         lastName: {
           required: true,
-          min: constants.sizes.SIZE_XXS,
-          max: constants.sizes.SIZE_XS,
+          max: constants.sizes.SIZE_M,
           trigger: 'blur'
         },
         address: {
@@ -76,11 +75,13 @@ export default {
   },
   methods: {
     onEditSupplier (eventData) {
-      console.log('Edit Supplier:' + eventData)
+      this.supplierId = eventData.id;
+      console.log('Edit Supplier:' + JSON.stringify(eventData));
       if (eventData != null) {
         this.$http.get('suppliers/' + eventData.id)
           .then(response => {
             this.supplier = response.data
+            this.supplier.id = eventData.id
             this.visible = true
             this.clearValidation()
           })
@@ -93,9 +94,10 @@ export default {
     save () {
       this.$refs['supplierForm'].validate().then(() => {
         let _self = this
+        console.log(this, this.supplier);
         if (this.supplier.id != null) {
           // existing supplier, update
-          this.$http.patch('suppliers/' + this.supplier.id, this.supplier, {
+          this.$http.patch('suppliers/' + this.supplierId, this.supplier, {
             // transform the selected roles into URIs, before sending
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data)

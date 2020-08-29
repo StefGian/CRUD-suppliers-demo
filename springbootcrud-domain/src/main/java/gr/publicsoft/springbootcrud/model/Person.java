@@ -45,10 +45,12 @@ public class Person {
     private String comments;
 
     public void setId(long id) {
+        System.out.println("person setId:" + id);
         this.id = id;
     }
 
     public long getId() {
+        System.out.println("person getId:" + id);
         return id;
     }
 
